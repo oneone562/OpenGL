@@ -1,0 +1,28 @@
+#需求的最低cmake程序版本
+cmake_minimum_required(VERSION 3.12)
+
+#本工程的名字
+project(opengl_window)
+
+#本工程支持的C++版本
+set(CMAKE_CXX_STANDARD 17)
+
+
+#添加头文件搜索路径
+include_directories(
+	system ${CMAKE_CURRENT_SOURCE_DIR}/thirdParty/include
+)
+#添加链接到第三方库的路径
+link_directories(
+	system ${CMAKE_CURRENT_SOURCE_DIR}/thirdParty/lib)
+
+#添加文件夹到lib库
+add_subdirectory(wrapper)
+add_subdirectory(application)
+
+
+#本工程所有cpp文件编译链接，生成exe
+add_executable(glStudy "main.cpp""glad.c" )
+
+#将lib库链接到可执行文件里面合成一个程序
+target_link_libraries(glStudy glfw3.lib wrapper app)

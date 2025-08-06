@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\vs2022_code\\Opengl\\glf_window\\application\\Application.h||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:application\\Application.h||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\vs2022_code\\Opengl\\glf_window\\application\\Application.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:application\\Application.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\vs2022_code\\Opengl\\glf_window\\application\\Application.h||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:application\\Application.h||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,13 +26,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Application.cpp",
               "DocumentMoniker": "D:\\vs2022_code\\Opengl\\glf_window\\application\\Application.cpp",
               "RelativeDocumentMoniker": "application\\Application.cpp",
               "ToolTip": "D:\\vs2022_code\\Opengl\\glf_window\\application\\Application.cpp",
               "RelativeToolTip": "application\\Application.cpp",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAswBwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-07-26T15:30:52.773Z",
               "IsPinned": true
@@ -51,13 +51,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Application.h",
               "DocumentMoniker": "D:\\vs2022_code\\Opengl\\glf_window\\application\\Application.h",
               "RelativeDocumentMoniker": "application\\Application.h",
               "ToolTip": "D:\\vs2022_code\\Opengl\\glf_window\\application\\Application.h",
               "RelativeToolTip": "application\\Application.h",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-07-26T15:30:19.737Z"
             },
@@ -69,7 +69,7 @@
               "RelativeDocumentMoniker": "main.cpp",
               "ToolTip": "D:\\vs2022_code\\Opengl\\glf_window\\main.cpp",
               "RelativeToolTip": "main.cpp",
-              "ViewState": "AgIAAK4AAAAAAAAAAAAAAJwAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAN4AAAAAAAAAAAAUwFgBAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-07-22T02:12:21.419Z",
               "EditorCaption": ""

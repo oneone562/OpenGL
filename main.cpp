@@ -177,21 +177,53 @@ void preparelnterleavedBuffer() {
 	glBindVertexArray(0);
 }
 
+void prepareVAOForGLTriangles(){
+	float positions[] = {
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			 0.0f,  0.5f, 0.0f,
+			 0.5f,  0.5f, 0.0f,
+			 0.8f,  0.8f, 0.0f,
+			 0.8f,  0.0f, 0.0f,
+	};
+	GLuint posVbo;
+	glGenBuffers(1, &posVbo);
+	glBindBuffer(GL_ARRAY_BUFFER, posVbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(positions), positions, GL_STATIC_DRAW);
+
+	
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
+	glBindBuffer(GL_ARRAY_BUFFER, posVbo);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+
+	glBindVertexArray(0);
+}
+//3 测试Triangle的三种mode:TRIANGLES TRIANGLE_STRIP TRIANGLE_FAN
+    //测试Line的二种mode:LINES    LINE_STRIP
+
 
 void prepareShader() {
 	const char* vertexShaderSource =
 		"#version 460 core\n"
 		"layout(location = 0)in vec3 aPos; \n"
+		"layout(location = 1)in vec3 aColor; \n"
+		"out vec3 color;\n"
+
 		"void main()\n"
 		"{\n"
 		"    gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0); \n"
+		"    color=aColor;\n"
 		"}\0";
 	const char* fragmentShaderSource =
 		"#version 330 core\n"
 		"out vec4 FragColor; \n"
+		"in vec3 color;\n"
 		"void main()\n"
 		"{\n"
-		"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+		"   FragColor = vec4(color, 1.0f);\n"
 		"}\n\0";
 		//2 创建Shader程序(vs、fs)
 	GLuint vertex, fragment;
@@ -239,6 +271,64 @@ void prepareShader() {
 	glDeleteShader(fragment);
 }
 
+void prepareVAO() {
+	float positions[] = {
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			 0.0f,  0.5f, 0.0f,
+			
+	};
+	float colors[] = {
+		1.0f,0.0f,0.0f,
+		0.0f,1.0f,0.0f,
+		0.0f,0.0f,1.0f
+	};
+
+	unsigned int indices[] = {
+		0,1,2,
+		
+	};
+
+	//2 VBO创建
+	GLuint posVbo, colorVbo;
+	glGenBuffers(1, &posVbo);
+	glBindBuffer(GL_ARRAY_BUFFER, posVbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(positions), positions, GL_STATIC_DRAW);
+
+	glGenBuffers(1, &colorVbo);
+	glBindBuffer(GL_ARRAY_BUFFER, colorVbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
+	//3 EBO创建
+	GLuint ebo;
+	glGenBuffers(1, &ebo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	//4 VAO创建
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+	//5 绑定vbo ebo 加入属性描述信息
+	//5.1加入位置属性描述信息
+	glBindBuffer(GL_ARRAY_BUFFER, posVbo);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	//5.2加入颜色属性描述
+	glBindBuffer(GL_ARRAY_BUFFER, colorVbo);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+
+	
+	//5.3加入ebo到当前vao
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	//练习glDrawElements
+	//-如果使用了ebo，最后一个参数可以写0;
+	//-如果使用了ebo，假设最后一个参数是数字，表示ebo内偏移量
+	//-如果没有使用ebo，可以直接将cpu端的indices数组传输进去
+
+
+	glBindVertexArray(0);
+
+}
+
 
 void render() {
 	//执行画布清理操作
@@ -250,7 +340,19 @@ void render() {
 	glBindVertexArray(vao);
 
 	//3 发出绘制指令
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	//glDrawArrays(GL_TRIANGLES, 0, 6);
+	// //-如果使用了ebo，最后一个参数可以写0;
+	glDrawElements(GL_TRIANGLES,3,GL_UNSIGNED_INT,0);
+	//-如果使用了ebo，假设最后一个参数是数字，表示ebo内偏移量
+	
+	//glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, (void*)(sizeof(int)*3));
+	//如果没有使用ebo，可以直接将cpu端的indices数组传输进去
+	/*unsigned int indices[] = {
+		0,1,2,
+		2,1,3
+	};
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, indices);*/
+	glBindVertexArray(0);
 
 }
 
@@ -269,7 +371,9 @@ int main() {
 
 	prepareShader();
 	//prepareSingleBuffer();
-	preparelnterleavedBuffer();
+	//preparelnterleavedBuffer();
+	//prepareVAOForGLTriangles();
+	prepareVAO();
 	
 //3 执行窗口循环
 	while (app->update()) {
